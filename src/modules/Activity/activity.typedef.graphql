@@ -1,0 +1,37 @@
+type Activity {
+  id: ID
+  type: String
+  duration: Float
+  distance: Float
+  calories_burned: Float
+  goal: ID
+  user: ID
+}
+
+type Query {
+  activity(id: ID!): Activity
+  activities:[Activity]
+}
+
+type Mutation{
+    createActivity(
+        type: String!
+        duration: Float!
+        distance: Float!
+        calories_burned: Float!
+        goal: ID!
+        user: ID!
+    ):Activity
+
+    updateActivity(
+        id:ID!
+        type: String!
+        duration: Float!
+        distance: Float!
+        calories_burned: Float!
+        goal: ID!
+        user: ID!
+    ):Activity
+
+    deleteActivity(id:ID):Activity
+}

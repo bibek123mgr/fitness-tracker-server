@@ -1,0 +1,37 @@
+scalar Date
+
+type Goal{
+    id:ID
+    goal_type:String
+    target_weight:Float
+    progress:Float
+    deadline:Date
+    user:ID
+    status:String
+}
+
+type Query{
+    goal(id:ID!):Goal
+    goals:[Goal]
+}
+
+type Mutation{
+    createGoal(
+        goal_type:String!
+        target_weight:Float!
+        progress:Float!
+        deadline:Date!
+        user:ID!
+    ):Goal
+
+    updateGoal(
+        id:ID!
+        goal_type:String!
+        target_weight:Float!
+        progress:Float!
+        deadline:Date!
+        user:ID!
+    ):Goal
+
+    deleteGoal(id: ID!): Goal
+}

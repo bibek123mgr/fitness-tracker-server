@@ -1,0 +1,37 @@
+type Nutrition {
+  id: ID
+  meal_type: String
+  food_item: String
+  quantity: Float
+  calories: Float
+  goal: ID
+  user: ID
+}
+
+type Query {
+  nutrition(id: ID!): Nutrition
+  nutritions:[Nutrition]
+}
+
+type Mutation{
+    createNutrition(
+        meal_type: String!
+        food_item: String!
+        quantity: Float!
+        calories: Float!
+        goal: ID!
+        user: ID!
+    ):Nutrition
+
+    updateNutrition(
+        id:ID!
+        meal_type: String!
+        food_item: String!
+        quantity: Float!
+        calories: Float!
+        goal: ID!
+        user: ID!
+    ):Nutrition
+
+    deleteNutrition(id:ID):Nutrition
+}

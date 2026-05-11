@@ -1,0 +1,48 @@
+type User {
+  id: ID
+  name: String
+  email: String
+  gender: String
+  weight: Float
+  height: Float
+  age: Int
+}
+
+type LoginResponse{
+  success:Boolean
+  message:String
+  token:String
+}
+
+type Query {
+  user(id: ID!): User
+  users: [User]
+}
+
+type Mutation {
+  createUser(
+    name: String!
+    email: String!
+    gender: String!
+    weight: Float!
+    height: Float!
+    age: Int!
+  ): User
+
+  updateUser(
+    id: ID!
+    name: String!
+    email: String!
+    gender: String!
+    weight: Float!
+    height: Float!
+    age: Int!
+  ): User
+
+  deleteUser(id: ID!): User
+
+  loginUser(
+    email:String!
+    name:String!
+  ):LoginResponse
+}
