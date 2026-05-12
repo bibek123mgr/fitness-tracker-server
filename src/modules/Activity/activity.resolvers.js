@@ -1,22 +1,30 @@
 const activityService = require("../../service/activity.service")
-const goalMutation = {
+const activityMutation = {
     Query: {
-        goal: (parent, { id }) => {
+        activity: (parent, { id }, { user_id }) => {
+            if (!user_id) return null
             return activityService.activityFindById(id)
         },
-        goals: () => {
+        activities: (parent, args, { user_id }) => {
+            if (!user_id) return null
             return activityService.findAllActivity()
         }
     },
     Mutation: {
-        createGoal(parent, args) {
-            return activityService.createActivity(args)
+        createActivity(parent, args, { user_id }) {
+            console.log(user_id)
+            if (!user_id) return null
+            return activityService.createActivity(args,user_id)
         },
-        updateGoal(parent, args) {
+        updateActivity(parent, args, { user_id }) {
+            if (!user_id) return null
             return activityService.updateActivity(args)
         },
-        deleteGoal(parant, { id }) {
+        deleteActivity(parant, { id }, { user_id }) {
+            if (!user_id) return null
             return activityService.deleteActivity(id)
         }
     }
 }
+
+module.exports=activityMutation

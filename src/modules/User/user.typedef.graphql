@@ -27,6 +27,7 @@ type Mutation {
     weight: Float!
     height: Float!
     age: Int!
+    password:String!
   ): User
 
   updateUser(
@@ -43,6 +44,6 @@ type Mutation {
 
   loginUser(
     email:String!
-    name:String!
+    password:String!
   ):LoginResponse
 }

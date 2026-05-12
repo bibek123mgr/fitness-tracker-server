@@ -6,8 +6,12 @@ const userFindById = async (id) => {
     return await User.findById(id);
 }
 
-const userFindByEmailAddress = async (email) => {
-    return await User.findOne({ email });
+const userFindByEmailAddress = async (email, password) => {
+    const user = await User.findOne({ email });
+    if (!user) return null;
+    const isMatch = user.comparePassword(password)
+    if (!isMatch) return null;
+    return user;
 }
 
 const findAllUser = async () => {
@@ -15,9 +19,9 @@ const findAllUser = async () => {
 }
 
 const createUser = async (data) => {
-    const { name, email, age, gender, height, weight } = data
+    const { name, email, age, gender, height, weight, password } = data
     return User.create({
-        name, email, age, gender, height, weight
+        name, email, age, gender, height, weight, password
     })
 }
 
@@ -32,7 +36,7 @@ const deleteUser = async (id) => {
     return User.findByIdAndDelete(id)
 }
 
-module.exports={
+module.exports = {
     userFindById,
     userFindByEmailAddress,
     findAllUser,

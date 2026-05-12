@@ -21,7 +21,6 @@ type Mutation{
         target_weight:Float!
         progress:Float!
         deadline:Date!
-        user:ID!
     ):Goal
 
     updateGoal(

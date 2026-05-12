@@ -2,24 +2,39 @@
 const goalService = require("../../service/goal.service")
 const goalMutation = {
     Query: {
-        goal: (parent, { id }) => {
+        goal: (parent, { id },  { user_id }) => {
+            if (!user_id) {
+                return
+            }
             return goalService.goalFindById(id)
         },
-        goals: () => {
-            return goalService.findAllGoal()
+        goals: (parent, args, { user_id }) => {
+            if (!user_id) {
+                return
+            }
+            return goalService.findAllGoal(user_id)
         }
     },
     Mutation: {
-        createGoal(parent, args) {
-            return goalService.createGoal(args)
+        createGoal(parent, args, {user_id}) {
+            if (!user_id) {
+                return
+            }
+            return goalService.createGoal(args,user_id)
         },
-        updateGoal(parent, args) {
+        updateGoal(parent, args, {user_id}) {
+             if (!user_id) {
+                return
+            }
             return goalService.updateGoal(args)
         },
-        deleteGoal(parant, { id }) {
+        deleteGoal(parant, { id }, {user_id}) {
+             if (!user_id) {
+                return
+            }
             return goalService.deleteGoal(id)
         }
     }
 }
 
-module.exports=goalMutation
+module.exports = goalMutation

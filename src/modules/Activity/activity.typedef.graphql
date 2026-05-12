@@ -20,7 +20,6 @@ type Mutation{
         distance: Float!
         calories_burned: Float!
         goal: ID!
-        user: ID!
     ):Activity
 
     updateActivity(
@@ -30,7 +29,6 @@ type Mutation{
         distance: Float!
         calories_burned: Float!
         goal: ID!
-        user: ID!
     ):Activity
 
     deleteActivity(id:ID):Activity

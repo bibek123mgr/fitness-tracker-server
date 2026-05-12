@@ -1,4 +1,5 @@
 
+const { default: mongoose } = require("mongoose");
 const Goal = require("../model/Goal.model")
 
 
@@ -7,13 +8,12 @@ const goalFindById = async (id) => {
 }
 
 
-const findAllGoal = async () => {
-    return await Goal.find()
-}
-
-const createGoal = async (data) => {
-    const { goal_type, target_weight, progress, deadline, user } = data
-    console.log(data)
+const findAllGoal = async (userId) => {
+    const goals = await Goal.find({ user: userId });
+    return goals;
+};
+const createGoal = async (data, user) => {
+    const { goal_type, target_weight, progress, deadline } = data
     return Goal.create({
         goal_type, target_weight, progress, deadline, user
     })

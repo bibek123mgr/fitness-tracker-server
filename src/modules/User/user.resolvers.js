@@ -24,17 +24,14 @@ const userResolvers = {
         deleteUser(parent, { id }, context) {
             return userService.deleteUser(id)
         },
-        loginUser(parent, { email, name }, context) {
-            const user = userService.userFindByEmailAddress(args);
+        async loginUser(parent, { email, password }, context) {
+            const user = await userService.userFindByEmailAddress(email, password);
             if (!user) {
-                return GraphQLError({
-                    message: "unauthorized"
-                })
-            }
-            if (user.name == name) {
-                return GraphQLError({
-                    message: "unauthorized"
-                })
+                return {
+                    success: false,
+                    message: "Unauthorized",
+                    token:""
+                }
             }
             const token = jwt.sign({
                 user_id: user._id
@@ -42,7 +39,7 @@ const userResolvers = {
                 expiresIn: "7d"
             })
             return {
-                status: true,
+                success: true,
                 message: "Login Successfully",
                 token
             }

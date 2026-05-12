@@ -6,12 +6,12 @@ const activityFindById = async (id) => {
     return await Activity.findById(id);
 }
 
-const findAllActivity = async () => {
+const findAllActivity = async (user) => {
     return await Activity.find()
 }
 
-const createActivity = async (data) => {
-    const {type,duration,distance,calories_burned, user,goal } = data
+const createActivity = async (data,user) => {
+    const {type,duration,distance,calories_burned,goal } = data
     return Activity.create({
        type,duration,distance,calories_burned, user,goal
     })
