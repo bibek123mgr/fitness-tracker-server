@@ -20,7 +20,6 @@ type Mutation{
         quantity: Float!
         calories: Float!
         goal: ID!
-        user: ID!
     ):Nutrition
 
     updateNutrition(
@@ -30,7 +29,6 @@ type Mutation{
         quantity: Float!
         calories: Float!
         goal: ID!
-        user: ID!
     ):Nutrition
 
     deleteNutrition(id:ID):Nutrition

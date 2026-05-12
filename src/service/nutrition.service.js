@@ -6,12 +6,12 @@ const nutritionFindById = async (id) => {
     return await Nutrition.findById(id);
 }
 
-const findAllNutrition = async () => {
-    return await Nutrition.find()
+const findAllNutrition = async (user) => {
+    return await Nutrition.find({user})
 }
 
-const createNutrition = async (data) => {
-    const { meal_type, food_item, quantity, calories, user,goal } = data
+const createNutrition = async (data,user) => {
+    const { meal_type, food_item, quantity, calories,goal } = data
     return Nutrition.create({
         meal_type, food_item, quantity, calories, user,goal
     })

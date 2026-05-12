@@ -1,22 +1,29 @@
 const nutritionService = require("../../service/nutrition.service")
-const goalMutation = {
+const nutritionMutation = {
     Query: {
-        goal: (parent, { id }) => {
+        nutrition: (parent, { id }, { user_id }) => {
+            if (!user_id) return null
             return nutritionService.nutritionFindById(id)
         },
-        goals: () => {
-            return nutritionService.findAllNutrition()
+        nutritions: (parent, args, { user_id }) => {
+            if (!user_id) return null
+            return nutritionService.findAllNutrition(user_id)
         }
     },
     Mutation: {
-        createGoal(parent, args) {
-            return nutritionService.createNutrition(args)
+        createNutrition(parent, args, { user_id }) {
+            if (!user_id) return null
+            return nutritionService.createNutrition(args,user_id)
         },
-        updateGoal(parent, args) {
+        updateNutrition(parent, args, { user_id }) {
+            if (!user_id) return null
             return nutritionService.updateNutrition(args)
         },
-        deleteGoal(parant, { id }) {
+        deleteNutrition(parant, { id }, { user_id }) {
+            if (!user_id) return null
             return nutritionService.deleteNutrition(id)
         }
     }
 }
+
+module.exports = nutritionMutation

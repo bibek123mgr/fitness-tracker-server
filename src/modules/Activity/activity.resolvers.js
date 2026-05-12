@@ -12,7 +12,6 @@ const activityMutation = {
     },
     Mutation: {
         createActivity(parent, args, { user_id }) {
-            console.log(user_id)
             if (!user_id) return null
             return activityService.createActivity(args,user_id)
         },
